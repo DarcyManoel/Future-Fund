@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<link rel="icon" href="icon.svg">
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<title>Future Fund</title>
+	</head>
+	<body>
+		<div>
+			<div id="data-tools" style="display:none;">
+				<div onclick="importData()">Import</div>
+				<div onclick="exportData()">Export</div>
+			</div>
+			<div id="action">
+				<div id="A-account">
+					No Accounts
+					<div id="AA-create" onclick="createAccount()"><span>Create</span></div>
+					<div id="AA-upload" onclick="importData()"><span>Import</span></div>
+				</div>
+				<div id="A-accounts-dots"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="scripts.js"></script>
+</html>

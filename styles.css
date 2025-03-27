@@ -1,0 +1,134 @@
+::-webkit-scrollbar{
+	display:none;
+}
+@font-face{
+	font-family:SF-Pro-Display-Regular;
+	src:url(fonts/SF-Pro-Display-Regular.otf);
+}
+*{
+	box-sizing:border-box;
+	outline:none;
+}
+body{
+	background:black;
+	cursor:default;
+	display:flex;
+	font-family:SF-Pro-Display-Regular;
+	overscroll-behavior:none;
+	user-select:none;
+}
+body>div{
+	background:white;
+	border-radius:1em 1em 0 0;
+	flex:1;
+	overflow:scroll;
+}
+.AA-arrow{
+	cursor:pointer;
+	display:inline-block;
+	margin:0 .25em;
+	padding:0 .25em;
+	rotate:180deg;
+	transition:.5s;
+}
+.AA-arrow:hover{
+	margin:0;
+	padding:0 .5em;
+	translate:-.25em;
+}
+.AA-arrow~.AA-arrow{
+	rotate:none;
+}
+.AA-arrow~.AA-arrow:hover{
+	translate:.25em;
+}
+.AA-arrow::before{
+	content:'\27A4';
+}
+.selected-account{
+	opacity:1!important;
+}
+.selected-account::before{
+	display:inline-block;
+	rotate:180deg;
+}
+.static-account{
+	opacity:.25;
+	pointer-events:none;
+}
+#data-tools{
+	display:flex;
+	justify-content:center;
+	padding:.5em;
+	width:100%;
+}
+#data-tools>div{
+	cursor:pointer;
+	opacity:.5;
+	padding:0 .25em;
+	transition:.5s;
+}
+#data-tools>div:hover{
+	opacity:1;
+}
+#action{
+	left:50%;
+	position:absolute;
+	text-align:center;
+	top:20vh;
+	translate:-50%;
+}
+#A-account{
+	font-size:3em;
+	opacity:.25;
+	transition:.5s;
+}
+#AA-create,
+#AA-upload{
+	font-size:.5em;
+}
+#AA-create{
+	margin:.15em;
+}
+#AA-create::before,
+#AA-upload::before{
+	content:'\2937';
+}
+#AA-create::after,
+#AA-upload::after{
+	content:'\2936';
+}
+#AA-create>span,
+#AA-upload>span{
+	animation:pulse-slide-pseudo .5s infinite alternate;
+	cursor:pointer;
+	padding:0 .5em;
+	transition:font-size .25s;
+}
+#AA-create>span:hover,
+#AA-upload>span:hover{
+	border-radius:1em;
+	border:3px solid #aaa;
+	font-size:1.1em;
+}
+#A-accounts-dots{
+	display:flex;
+	gap:.5em;
+	justify-content:center;
+}
+#AAD-create{
+	cursor:pointer;
+	opacity:.5;
+	transition:.25s;
+}
+#AAD-create:hover{
+	opacity:1;
+}
+@keyframes pulse-slide-pseudo{
+	0%{
+		margin:0 .25em;
+	}
+	100%{
+		margin:0 .5em;
+	}
+}
