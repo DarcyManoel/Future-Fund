@@ -29,34 +29,42 @@ function exportData(){
 	URL.revokeObjectURL(link.href)
 }
 function createAccount(){
-	let accountName=prompt(`Choose a name for the new account`)
+	let accountName=prompt(`Choose a name for the new account.`)
 	if(accountName){
-		accounts[accountName]={}
-		renderAccount(0,accountName)
+		accounts[accountName]={balances:{}}
+		renderAccount(accountName)
 	}
 }
 let selectedAccountId=0
-function renderAccount(relativeMovement,accountName){
-	document.getElementById(`data-tools`).style.display=``
-	if(accountName){
-		selectedAccountId=Object.keys(accounts).indexOf(accountName)
-	}else{
-		if(selectedAccountId===0&&relativeMovement===-1){
+let selectedAccountName=``
+function renderAccount(account){
+	document.getElementById(`export`).classList.remove(`action-blocked`)
+	if(typeof account ===`string`){
+		selectedAccountName=account
+		selectedAccountId=Object.keys(accounts).indexOf(account)
+	}else if(typeof account ===`number`){
+		//	'account' parameter doubles as an instruction on changing the selected account either forwards or backwards
+		if(selectedAccountId===0&&account===-1){
 			selectedAccountId=Object.keys(accounts).length-1
-		}else if(selectedAccountId===Object.keys(accounts).length-1&&relativeMovement===1){
+		}else if(selectedAccountId===Object.keys(accounts).length-1&&account===1){
 			selectedAccountId=0
 		}else{
-			selectedAccountId+=relativeMovement
+			selectedAccountId+=account
 		}
-		accountName=Object.keys(accounts)[selectedAccountId]
+		selectedAccountName=Object.keys(accounts)[selectedAccountId]
 	}
-	let staticAccountClass=Object.keys(accounts).length===1?`static-account`:``
-	document.getElementById(`A-account`).innerHTML=`<div onclick="renderAccount(-1)" class="AA-arrow ${staticAccountClass}"${staticAccountClass}></div>${accountName}<div onclick="renderAccount(1)" class="AA-arrow ${staticAccountClass}"></div>`
-	document.getElementById(`A-account`).style.opacity=``
-	document.getElementById(`A-account`).classList.add(`selected-account`)
-	document.getElementById(`A-accounts-dots`).innerHTML=``
+	document.getElementById(`selected-account-name`).innerHTML=selectedAccountName
+	document.getElementById(`accounts-dots`).innerHTML=``
+	let accountsCount=0
 	for(let account of Object.keys(accounts)){
-		document.getElementById(`A-accounts-dots`).innerHTML+=`<span>${account===accountName?`&#9864;`:`&#9862;`}</span>`
+		++accountsCount
+		document.getElementById(`accounts-dots`).innerHTML+=`<span>${account===selectedAccountName?`&#9864;`:`&#9862;`}</span>`
 	}
-	document.getElementById(`A-accounts-dots`).innerHTML+=`|<span id="AAD-create" onclick="createAccount()">create account</span>`
+	for(let arrow of document.getElementsByClassName(`selected-account-arrow`)){
+		if(accountsCount>1){
+			arrow.classList.remove(`static-account`)
+		}else{
+			arrow.classList.add(`static-account`)
+		}
+	}
 }

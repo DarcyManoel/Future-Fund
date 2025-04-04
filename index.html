@@ -5,19 +5,21 @@
 		<title>Future Fund</title>
 	</head>
 	<body>
-		<div>
-			<div id="data-tools" style="display:none;">
-				<div onclick="importData()">Import</div>
-				<div onclick="exportData()">Export</div>
+		<div id="data-tools">
+			<div id="import" class="action" onclick="importData()">Import</div>
+			<div id="export" class="action action-blocked" onclick="exportData()">Export</div>
+		</div>
+		<div id="account">
+			<div id="accounts-dots"></div>
+			<div id="selected-account-wrapper">
+				<div onclick="renderAccount(-1)" class="selected-account-arrow static-account"></div>
+				<div id="selected-account-name"></div>
+				<div onclick="renderAccount(1)" class="selected-account-arrow static-account"></div>
 			</div>
-			<div id="action">
-				<div id="A-account">
-					No Accounts
-					<div id="AA-create" onclick="createAccount()"><span>Create</span></div>
-					<div id="AA-upload" onclick="importData()"><span>Import</span></div>
-				</div>
-				<div id="A-accounts-dots"></div>
+			<div id="create-account" class="action" onclick="createAccount()">
+				create account
 			</div>
+			<div id="selected-account-balance"></div>
 		</div>
 	</body>
 	<script type="text/javascript" src="scripts.js"></script>
