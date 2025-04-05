@@ -35,10 +35,19 @@ function createAccount(){
 		renderAccount(accountName)
 	}
 }
+function reportBalance(){
+	let balance=prompt(`Enter your current balance for account:\n${selectedAccountName}`)
+	let timestampUTCISO=new Date().toISOString()
+	if(balance){
+		accounts[selectedAccountName].balances[timestampUTCISO]=balance
+		renderAccount()
+	}
+}
 let selectedAccountId=0
 let selectedAccountName=``
 function renderAccount(account){
 	document.getElementById(`export`).classList.remove(`action-blocked`)
+	document.getElementById(`report-balance`).classList.remove(`action-blocked`)
 	if(typeof account ===`string`){
 		selectedAccountName=account
 		selectedAccountId=Object.keys(accounts).indexOf(account)
@@ -66,5 +75,11 @@ function renderAccount(account){
 		}else{
 			arrow.classList.add(`static-account`)
 		}
+	}
+	let balances=Object.entries(accounts[selectedAccountName].balances)
+	if(balances.length){
+		document.getElementById(`selected-account-balance`).innerHTML=parseFloat(balances[balances.length-1][1]).toFixed(2)
+	}else{
+		document.getElementById(`selected-account-balance`).innerHTML=``
 	}
 }

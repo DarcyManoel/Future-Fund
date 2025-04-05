@@ -97,18 +97,19 @@ body{
 			font-size:.5em;
 			height:1em;
 		}
-		#create-account{
+		#create-account,
+		#report-balance{
 			font-size:calc(1em / 3);
 		}
 		#selected-account-balance{
 			font-size:.75em;
 		}
-		#selected-account-balance:not(:empty):before{
-			content:'$';
-		}
 		#selected-account-balance:empty:before{
 			content:'No Balance';
 			opacity:.5;
+		}
+		#selected-account-balance:not(:empty):before{
+			content:'$';
 		}
 		font-size:3em;
 		left:50%;
